@@ -29,10 +29,10 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     <header>
         <?php
             if (isset($_SESSION['adm'])) {
-                include_once 'components/navigation_user.php';
+                include_once 'components/navigation_admin.php';
             }
             if (isset($_SESSION['user'])) {
-                include_once 'components/navigation_admin.php';
+                include_once 'components/navigation_user.php';
             }
         ?>
     </header>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
             if(mysqli_num_rows($result) > 0) {
             foreach($set as $value)
                 {
-                    echo showItem($value['picture'], $value['name'], $value['description'], $value['age'], $value['address'], $value['city'], $value['zip'], $value['id']);
+                    echo showPet($value['picture'], $value['name'], $value['description'], $value['age'], $value['address'], $value['city'], $value['zip'], $value['animal_id']);
                 }
             } else {
             echo "<div>No data to display</div>";
