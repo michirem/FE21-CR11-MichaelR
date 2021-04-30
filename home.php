@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-require_once 'actions/db_connect.php';
-require_once 'components/functions.php';
-
-if (isset($_SESSION['adm'])) { // if adm will redirect to admin.php
-    header("Location: admin.php");
-    exit;
-}
 // if session is not set this will redirect to login page
 if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     header("Location: login.php");
@@ -28,12 +21,7 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
 <body>
     <header>
         <?php
-            if (isset($_SESSION['adm'])) {
-                include_once 'components/navigation_admin.php';
-            }
-            if (isset($_SESSION['user'])) {
-                include_once 'components/navigation_user.php';
-            }
+            include_once 'components/navigation.php';
         ?>
     </header>
         <?php
@@ -43,20 +31,7 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
         <h1 class="my-3 text-center">Collection of the finest Pets you can find on the web!</h1>
         <div class="row justify-content-evenly py-5">
             <?php
-
-            $query = "SELECT * FROM animals LEFT JOIN location ON animals.location_id = location.location_id";
-            $result = mysqli_query($connect, $query);
-            for ($set = array(); $row = mysqli_fetch_assoc($result); $set[] = $row);
-
-            if(mysqli_num_rows($result) > 0) {
-            foreach($set as $value)
-                {
-                    echo showPet($value['picture'], $value['name'], $value['description'], $value['age'], $value['address'], $value['city'], $value['zip'], $value['animal_id']);
-                }
-            } else {
-            echo "<div>No data to display</div>";
-            }
-            
+                include_once 'components/homemain.php';
             ?>
         </div>
     </div>
