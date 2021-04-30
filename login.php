@@ -42,7 +42,7 @@ if (isset($_POST['btn-login'])) {
 
         $password = hash('sha256', $pass); // password hashing
 
-        $sqlSelect = "SELECT id, first_name, password, status FROM user WHERE email = ? ";
+        $sqlSelect = "SELECT user_id, first_name, password, status FROM user WHERE email = ? ";
         $stmt = mysqli_prepare($connect, $sqlSelect);
         $stmt->bind_param("s", $email);
         $work = $stmt->execute();
@@ -51,10 +51,10 @@ if (isset($_POST['btn-login'])) {
         $count = $result->num_rows;
         if ($count == 1 && $row['password'] == $password) {
             if($row['status'] == 'adm'){
-                $_SESSION['adm'] = $row['id'];           
+                $_SESSION['adm'] = $row['user_id'];           
                 header( "Location: admin.php");}
             else{
-                $_SESSION['user'] = $row['id']; 
+                $_SESSION['user'] = $row['user_id']; 
                header( "Location: home.php");
             }          
         } else {
@@ -80,8 +80,8 @@ $connect->close();
         include_once 'components/defaulthero.php';
     ?>
     <div class="container">
-        <div class="d-flex flex-column align-items-center py-5">
-            <form class="w-75" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+        <div class="d-flex flex-column justify-content-center align-items-center py-5">
+            <form class="w-50" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
                 <?php
                 if (isset($errMSG)) {
                     echo $errMSG;
