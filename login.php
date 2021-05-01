@@ -5,12 +5,9 @@ require_once 'actions/db_connect.php';
 require_once 'components/functions.php';
 
 // it will never let you open index(login) page if session is set
-if (isset($_SESSION['user']) != "") {
-    header("Location: home.php"); // redirects to admin.php
+if (isset($_SESSION['user']) != "" || isset($_SESSION['adm']) != "") {
+    header("Location: home.php"); // redirects to ahome.php
     exit;
-}
-if (isset($_SESSION['adm']) != "") {
-    header("Location: home.php"); // redirects to home.php
 }
 
 $error = false;
