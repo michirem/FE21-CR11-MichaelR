@@ -52,7 +52,7 @@ if (isset($_POST['btn-login'])) {
         if ($count == 1 && $row['password'] == $password) {
             if($row['status'] == 'adm'){
                 $_SESSION['adm'] = $row['user_id'];           
-                header( "Location: admin.php");}
+                header( "Location: home.php");}
             else{
                 $_SESSION['user'] = $row['user_id']; 
                header( "Location: home.php");
