@@ -11,14 +11,13 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     exit;
 }
 
-$id = $_SESSION['user'];
-
 if (isset($_SESSION['user'])){
-    $query = "SELECT animals.picture, name, date_collected, first_name, last_name FROM petadoption LEFT JOIN `user` ON petadoption.user_id = user.user_id LEFT JOIN animals ON petadoption.animal_id = animals.animal_id WHERE petadoption.user_id = {$id}";
+    $id = $_SESSION['user'];
+    $query = "SELECT animals.animal_id, animals.picture, name, date_collected, first_name, last_name, animals.status FROM petadoption LEFT JOIN `user` ON petadoption.user_id = user.user_id LEFT JOIN animals ON petadoption.animal_id = animals.animal_id WHERE petadoption.user_id = {$id} AND animals.status = 'adopted'";
 }
 
 if (isset($_SESSION['adm'])){
-    $query = "SELECT animals.picture, name, date_collected, first_name, last_name FROM petadoption LEFT JOIN `user` ON petadoption.user_id = user.user_id LEFT JOIN animals ON petadoption.animal_id = animals.animal_id";
+    $query = "SELECT animals.animal_id, animals.picture, name, date_collected, first_name, last_name, animals.status FROM petadoption LEFT JOIN `user` ON petadoption.user_id = user.user_id LEFT JOIN animals ON petadoption.animal_id = animals.animal_id WHERE animals.status = 'adopted'";
 }
 
 $tbody = '';
@@ -27,7 +26,7 @@ $result = mysqli_query($connect, $query);
         if(mysqli_num_rows($result)  > 0){
             for ($set = array(); $rows = mysqli_fetch_assoc($result); $set[] = $rows);
             foreach($set as $value){
-                $tbody .= showRows($value['picture'], $value['name'], $value['date_collected'], $value['first_name']." ".$value['last_name']);
+                $tbody .= showRows($value['picture'], $value['name'], $value['date_collected'], $value['first_name']." ".$value['last_name'], $value['status'], $value['animal_id']);
             }
         } else {
             echo "<tr><td colspan='4'><center>No Data Available </center></td></tr>";
@@ -66,6 +65,7 @@ $result = mysqli_query($connect, $query);
                         <th>Name</th>
                         <th>Date collected</th>
                         <th>By user</th>
+                        <th>Status</th>
                         <?php if(isset($_SESSION['adm'])){echo "<th>Action</th>";};?>
                     </tr>
                 </thead>
