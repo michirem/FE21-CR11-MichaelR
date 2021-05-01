@@ -10,7 +10,7 @@ if (isset($_SESSION['user']) != "") {
     exit;
 }
 if (isset($_SESSION['adm']) != "") {
-    header("Location: admin.php"); // redirects to admin.php
+    header("Location: home.php"); // redirects to home.php
 }
 
 $error = false;
