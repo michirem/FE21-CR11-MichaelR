@@ -3,7 +3,7 @@
 session_start();
 
 require_once 'db_connect.php';
-include_once 'showitems.php';
+include_once '../components/functions.php';
 
 // if session is not set this will redirect to login page
 if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
@@ -20,7 +20,7 @@ if (isset($_SESSION['user'])) {
 if ($_POST) {
     $id = $_POST['id'];
 
-    $query = "DELETE FROM animals WHERE id = {$id}";
+    $query = "DELETE FROM animals WHERE animal_id = {$id}";
     if (mysqli_query($connect, $query) === true) {
         $class = "success";
         $message = "Successfully Deleted!";
@@ -52,7 +52,7 @@ if ($_POST) {
             </div>
             <div class="alert alert-<?=$class;?> d-flex flex-column align-items-center" role="alert">
                 <p><?=$message;?></p>
-                <a href='../home.php' class="btn btn-success">Back</a>
+                <a href='../home.php' class="btn btn-primary">Back</a>
             </div>
         </div>
     </div>
