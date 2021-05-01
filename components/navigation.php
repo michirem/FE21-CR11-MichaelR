@@ -12,7 +12,7 @@
             <a class="nav-link active" aria-current="page" href="home.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="admin.php">Admin</a>
+            <a class="nav-link active" aria-current="page" href="adopted.php">Adopted Pets</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="profile.php">My Profile</a>
@@ -31,7 +31,7 @@
             <a class="nav-link active" aria-current="page" href="senior.php">Senior Pets</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="booking.php">My Reservations</a>
+            <a class="nav-link active" aria-current="page" href="adopted.php">My adopted Pets</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="contactus.php">Contact us</a>
