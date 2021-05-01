@@ -21,7 +21,7 @@
                     <p class=\"card-text\">Location:<br>".$address."<br>".$city."<br>ZIP: ".$zip."</p>
                 </div>
                 <div class=\"card-body\">
-                    <a href='details.php?id=".$id."' class='btn btn-primary btn-sm'>Take me home</a>
+                    <a href='adopt.php?id=".$id."' class='btn btn-primary btn-sm'>Take me home</a>
                 </div>
             </div>
         </div>";
@@ -41,10 +41,37 @@
                     <p class=\"card-text\">Location:<br>".$address."<br>".$city."<br>ZIP: ".$zip."</p>
                 </div>
                 <div class=\"card-body\">
+                    <a href='adopt.php?id=".$id."' class='btn btn-primary btn-sm'>Take me home</a>
+                </div>
+                <div class=\"card-body\">
                     <a href='update.php?id=".$id."' class='btn btn-primary btn-sm'>Edit</a>
                     <a href='delete.php?id=".$id."' class='btn btn-danger btn-sm'>Delete</a>
                 </div>
             </div>
         </div>";
         }
+    
+    // show rows for users and admins
+    function showRows($picture, $name, $date_collected, $user_id) {
+        if (isset($_SESSION['user'])){
+        $row = "<tr>
+            <td><img class='img-thumbnail' style='height: 150px;' src='".$picture."'</td>
+            <td>".$name."</td>
+            <td>".$date_collected."</td>
+            <td>".$user_id."</td>
+        </tr>";
+        }
+
+        if (isset($_SESSION['adm'])){
+        $row = "<tr>
+            <td><img class='img-thumbnail' style='height: 150px;' src='".$picture."'</td>
+            <td>".$name."</td>
+            <td>".$date_collected."</td>
+            <td>".$user_id."</td>
+            <td><button class='btn btn-danter btn-sm'>Take Back</button></td>
+        </tr>";
+        }
+
+        return $row;
+}
 ?>
