@@ -23,7 +23,7 @@ function file_upload($picture, $source) {
                 if ($fileSize < 5000000) { //500kb this number is in bytes
                     //it gives a file name based microseconds
                     $fileNewName = uniqid('') . "." . $fileExtension; // 1233343434.jpg i.e
-                    if($source == 'animal'){
+                    if($source == 'animal'){ // currently not in use because only URL input when creating new pets required
                         $destination = "../pictures/$fileNewName";
                     }elseif ($source == 'user'){
                         $destination = "pictures/$fileNewName";
