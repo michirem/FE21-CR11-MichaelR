@@ -27,7 +27,7 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 5 CSS bundle  -->
     <?php include_once 'components/bootcss.php';?>
-    <title>Delete Medium</title>
+    <title>Delete Pet</title>
 </head>
 <body>
     <div class="container">
@@ -39,7 +39,7 @@ if (isset($_SESSION['user'])) {
                 <form action ="actions/a_delete.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $id ?>" />
                     <button class="btn btn-primary" type="submit">Yes</button>
-                    <a href="admin.php" class="btn btn-danger">No</a>
+                    <a href="home.php" class="btn btn-danger">No</a>
                 </form>
             </div>
         </div>
