@@ -34,7 +34,7 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
         <h1 class="my-3 text-center">Our kind senior pets are waiting for you!</h1>
         <div class="row justify-content-evenly py-5">
             <?php
-                $query = "SELECT * FROM animals LEFT JOIN location ON animals.location_id = location.location_id WHERE animals.age >= 8";
+                $query = "SELECT * FROM animals LEFT JOIN location ON animals.location_id = location.location_id WHERE animals.age >= 8 AND animals.status = 'available'";
                 $result = mysqli_query($connect, $query);
                 for ($set = array(); $row = mysqli_fetch_assoc($result); $set[] = $row);     
                     if(mysqli_num_rows($result)) {
