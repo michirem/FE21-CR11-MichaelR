@@ -3,7 +3,7 @@
 require_once 'actions/db_connect.php';
 require_once 'functions.php';
 
-$query = "SELECT * FROM animals LEFT JOIN location ON animals.location_id = location.location_id";
+$query = "SELECT * FROM animals LEFT JOIN location ON animals.location_id = location.location_id WHERE status = 'available'";
 $result = mysqli_query($connect, $query);
 for ($set = array(); $row = mysqli_fetch_assoc($result); $set[] = $row);
 
