@@ -98,7 +98,7 @@ $connect->close();
                         </tr>
                         <tr>
                             <th></th>
-                            <input type= "hidden" name= "id" value= "<?php echo $animal_id ?>" />
+                            <input type= "hidden" name= "id" value= "<?php echo $id ?>" />
                             <td><button class="btn btn-primary" type= "submit">Save Changes</button></td>
                             <td><a href= "home.php" class="btn btn-danger">Back</a></td>
                         </tr>

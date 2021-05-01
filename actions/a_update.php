@@ -27,9 +27,9 @@
         $age = $_POST['age'];
         $status = $_POST['status'];
         $type = $_POST['type'];
-        $id = settype($_POST['id'], "integer");
+        $id = $_POST['id'];
 
-        $locations = mysqli_query($connect,"SELECT * FROM location WHERE location_id = $id");
+        $locations = mysqli_query($connect,"SELECT * FROM location WHERE location_id = $location_id");
         $row = $locations->fetch_array(MYSQLI_ASSOC);
 
         $query = "UPDATE `animals` SET `location_id` = '$location_id', `name` = '$name', `description` = '$description', `hobbies` = '$hobbies', `age` = '$age', `picture` = '$picture', `status` = '$status', `type` = '$type' WHERE `animals`.`animal_id` = $id"; 
