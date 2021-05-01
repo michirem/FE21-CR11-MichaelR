@@ -18,12 +18,12 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 5 CSS bundle  -->
     <?php include_once 'components/bootcss.php';?>
-   <title>Pizza Town - Contact</title>
+   <title>Contact - Meme Pets</title>
 </head>
 <body>
     <header>
         <?php
-        include_once 'components/navigation_user.php';
+        include_once 'components/navigation.php';
         ?>
     </header>
     <div class="d-flex justify-content-center align-items-center" style="background-image: url(https://images.unsplash.com/uploads/141103282695035fa1380/95cdfeef?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1874&q=80); height: 50vh; background-size: cover; background-repeat: no-repeat; background-position: 50% 30%;">
