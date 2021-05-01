@@ -1,6 +1,7 @@
 <?php
-
 session_start();
+
+include_once 'actions/db_connect.php';
 
 // if session is not set this will redirect to login page
 if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
@@ -14,6 +15,17 @@ if (isset($_SESSION['user'])) {
     exit;
 }
 
+$query = "SELECT * FROM location";
+$loc = mysqli_query($connect, $query);
+
+$options = '';
+while ($row = mysqli_fetch_array($loc, MYSQLI_ASSOC)){
+    $options .= 
+"<option value='{$row['location_id']}'>{$row['address']} - {$row['city']} - {$row['zip']}</option>";
+}
+
+$connect->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +36,7 @@ if (isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 5 CSS bundle  -->
     <?php include_once 'components/bootcss.php';?>
-    <title>Add Medium</title>
+    <title>Add Pet</title>
 </head>
 <body>
     <header>
@@ -38,7 +50,7 @@ if (isset($_SESSION['user'])) {
     <div class="container">
         <div class="d-flex flex-column align-items-center">
             <fieldset>
-                <legend class='h2 py-4'>Add a new Medium</legend>
+                <legend class='h2 py-4'>Add a new Pet</legend>
                 <form action="actions/a_create.php" method= "post" enctype="multipart/form-data">
                 <table class='table'>
                         <tr>
@@ -90,7 +102,7 @@ if (isset($_SESSION['user'])) {
                         </tr>
                         <tr>
                             <th></th>
-                            <td><button class='btn btn-primary mx-2' type="submit">Insert Medium</button><a href="home.php" class='btn btn-danger mx-2'>Cancel</a></td>
+                            <td><button class='btn btn-primary mx-2' type="submit">Insert Pet</button><a href="home.php" class='btn btn-danger mx-2'>Cancel</a></td>
                         </tr>
                     </table>
                 </form>
