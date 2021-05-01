@@ -13,10 +13,15 @@ if( !isset($_SESSION['adm']) && !isset($_SESSION['user']) ) {
 $message = '';
 $uploadError = '';
 
+$class = 'd-none';
+$error = false;
+$f_name = $l_name = $email = $picture = '';
+$fnameError = $lnameError = $emailError = $picError = '';
+
 //fetch and populate form
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM user WHERE user_id = {$id}";
+    $sql = "SELECT * FROM user WHERE user_id = $id";
     $result = $connect->query($sql);
     if ($result->num_rows == 1) {
         $data = $result->fetch_assoc();
@@ -26,12 +31,6 @@ if (isset($_GET['id'])) {
         $picture = $data['picture'];
     }   
 }
-
-//update
-$class = 'd-none';
-$error = false;
-$f_name = $l_name = $email = $picture = '';
-$fnameError = $lnameError = $emailError = $picError = '';
 
 if (isset($_POST["submit"])) {
     $f_name = sanitize($_POST['first_name']);
@@ -57,10 +56,11 @@ if (isset($_POST["submit"])) {
         $emailError = "Please enter valid email address.";
     } else {
     // checks whether the email exists or not
-        $query = "SELECT email FROM user WHERE email='$email'";
+        $query = "SELECT user_id, email FROM user WHERE email='$email'";
         $result = mysqli_query($connect, $query);
+        $row = mysqli_fetch_assoc($result);
         $count = mysqli_num_rows($result);
-        if ($count != 0) {
+        if ($count != 0 && $row['user_id'] != $id) {
             $error = true;
             $emailError = "Provided Email is already in use.";
         }
@@ -71,22 +71,25 @@ if (isset($_POST["submit"])) {
     $pictureArray = file_upload($_FILES['picture'], 'user'); //file_upload() called
     $picture = $pictureArray->fileName;
 
-    if ($pictureArray->error === 0) {       
-        ($_POST["picture"] == "avatar.webp") ?: unlink("pictures/{$_POST["picture"]}");
-        $sql = "UPDATE user SET first_name = '$f_name', last_name = '$l_name', email = '$email', picture = '$pictureArray->fileName' WHERE user_id = {$id}";
-    } else {
-        $sql = "UPDATE user SET first_name = '$f_name', last_name = '$l_name', email = '$email', WHERE user_id = {$id}";
-    }
-    if ($connect->query($sql) === true) {     
-        $class = "alert alert-success";
-        $message = "The record was successfully updated";
-        $uploadError = ($pictureArray->error != 0) ? $pictureArray->ErrorMessage : '';
-        header("refresh:3;url=update_profile.php?id={$id}");
-    } else {
-        $class = "alert alert-danger";
-        $message = "Error while updating record : <br>" . $connect->error;
-        $uploadError = ($pictureArray->error != 0) ? $pictureArray->ErrorMessage : '';
-        header("refresh:3;url=update_profile.php?id={$id}");
+    if(!$error) {
+
+        if ($pictureArray->error === 0) {       
+            ($_POST["picture"] == "avatar.webp") ?: unlink("pictures/{$_POST["picture"]}");
+            $sql = "UPDATE user SET first_name = '$f_name', last_name = '$l_name', email = '$email', picture = '$pictureArray->fileName' WHERE user_id = {$id}";
+        } else {
+            $sql = "UPDATE user SET first_name = '$f_name', last_name = '$l_name', email = '$email' WHERE user_id = {$id}";
+        }
+        if ($connect->query($sql) === true) {     
+            $class = "alert alert-success";
+            $message = "The record was successfully updated";
+            $uploadError = ($pictureArray->error != 0) ? $pictureArray->ErrorMessage : '';
+            header("refresh:3;url=update_profile.php?id={$id}");
+        } else {
+            $class = "alert alert-danger";
+            $message = "Error while updating record : <br>" . $connect->error;
+            $uploadError = ($pictureArray->error != 0) ? $pictureArray->ErrorMessage : '';
+            header("refresh:3;url=update_profile.php?id={$id}");
+        }
     }
 }
 
