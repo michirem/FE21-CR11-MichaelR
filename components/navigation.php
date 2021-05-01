@@ -15,7 +15,7 @@
             <a class="nav-link active" aria-current="page" href="admin.php">Admin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="profile_admin.php">My Profile</a>
+            <a class="nav-link active" aria-current="page" href="profile.php">My Profile</a>
           </li>
           <li class="nav-item d-lg-none">
             <a class="btn btn-primary" aria-current="page" href="actions/logout.php?logout">Logout</a>
@@ -37,7 +37,7 @@
             <a class="nav-link active" aria-current="page" href="contactus.php">Contact us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="profile_user.php">My Profile</a>
+            <a class="nav-link active" aria-current="page" href="profile.php">My Profile</a>
           </li>
           <li class="nav-item d-lg-none">
             <a class="btn btn-primary" aria-current="page" href="actions/logout.php?logout">Logout</a>
