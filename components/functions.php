@@ -52,13 +52,14 @@
         }
     
     // show rows for users and admins
-    function showRows($picture, $name, $date_collected, $user_id) {
+    function showRows($picture, $name, $date_collected, $user_id, $status, $id) {
         if (isset($_SESSION['user'])){
         $row = "<tr>
             <td><img class='img-thumbnail' style='height: 150px;' src='".$picture."'</td>
             <td>".$name."</td>
             <td>".$date_collected."</td>
             <td>".$user_id."</td>
+            <td>".$status."</td>
         </tr>";
         }
 
@@ -68,7 +69,8 @@
             <td>".$name."</td>
             <td>".$date_collected."</td>
             <td>".$user_id."</td>
-            <td><button class='btn btn-danter btn-sm'>Take Back</button></td>
+            <td>".$status."</td>
+            <td><a href='takeback.php?id=".$id."' class='btn btn-danger btn-sm'>Take Back</a></td>
         </tr>";
         }
 
