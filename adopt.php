@@ -27,7 +27,7 @@ if (isset($_SESSION['adm'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 5 CSS bundle  -->
     <?php include_once 'components/bootcss.php';?>
-    <title>Delete Medium</title>
+    <title>Adopt Pet</title>
 </head>
 <body>
     <div class="container">
@@ -37,7 +37,7 @@ if (isset($_SESSION['adm'])) {
                 <?php echo showPet($data['picture'], $data['name'], $data['description'], $data['age'], $data['address'], $data['city'], $data['zip'], $data['animal_id']);?>
                 <h3 class="mb-4">Do you really want to adopt this pet?</h3>
                 <a href="actions/a_adopt.php?id=<?php echo $id ?>" class="btn btn-primary">Yes</a>
-                <a href="home.php" class="btn btn-danger">No</a>
+                <a href="javascript:history.back()" class="btn btn-danger">No</a>
             </div>
         </div>
     </div>
